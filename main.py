@@ -46,15 +46,61 @@ def close_application(app_name) -> None:
   except Exception as e:
     print(f"Exception while closing '{app_name}' : {e}")
 
+def get_week_day() -> str:
+  day_int = datetime.now().weekday()
+  day = [day_name for day_name, day_number in days_dict.items() if day_number == day_int][0]
+  return day
+
+def hours_per_day(day: str) -> int:
+  days = [name for name, _ in days_dict.items()]
+  if day in days:
+    if day == "monday":
+      hours = 24
+    elif day == "tuesday":
+      hours = 22
+    elif day == "wednesday":
+      hours = 22
+    elif day == "thursday":
+      hours = 22
+    elif day == "friday":
+      hours = 22
+    elif day == "saturday":
+      hours = 22
+    else:
+      hours = 22
+    return hours
+  else:
+    print(f"""
+Error, wrong input: day:str
+{days}
+          """)
+    return 0
+
 def main():
   open_apps = get_open_apps()
-  # banned_apps = ['Safari', 'Firefox', 'Music', 'Steam', 'DeSmuME']
-  banned_apps = ['Obsidian']
-  if is_past_time(12):
+  closing_hour = hours_per_day(get_week_day())
+  if is_past_time(closing_hour):
     for banned_app in banned_apps:
       if banned_app in open_apps:
         close_application(banned_app)
-    
+
+banned_apps = ['Arc', 
+               'Safari', 
+               'Firefox', 
+               'Music', 
+               'Steam', 
+               'DeSmuME'
+               ]
+
+days_dict = {
+  "monday": 0,
+  "tuesday": 1,
+  "wednesday": 2,
+  "thursday": 3,
+  "friday": 4,
+  "saturday": 5,
+  "sunday": 6
+}   
 
 if __name__ == "__main__":
   main()
