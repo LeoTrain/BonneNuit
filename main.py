@@ -61,11 +61,11 @@ def hours_per_day(day: str) -> int:
     elif day == "wednesday":
       hours = 22
     elif day == "thursday":
-      hours = 22
+      hours = 24
     elif day == "friday":
-      hours = 22
+      hours = 24
     elif day == "saturday":
-      hours = 22
+      hours = 24
     else:
       hours = 22
     return hours
@@ -84,8 +84,7 @@ def main():
       if banned_app in open_apps:
         close_application(banned_app)
 
-banned_apps = ['Arc', 
-               'Safari', 
+banned_apps = ['Safari', 
                'Firefox', 
                'Music', 
                'Steam', 
