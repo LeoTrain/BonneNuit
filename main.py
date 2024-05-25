@@ -2,8 +2,11 @@ import subprocess
 from datetime import datetime
 from typing import List
 
-def is_past_22() -> bool:
-  return datetime.now().hour >= 22
+def is_past_time(time:int) -> bool:
+  if 0 <= time <= 23:
+    return datetime.now().hour >= time
+  else:
+    raise ValueError("Time must be between 0 and 23")
 
 def get_open_apps() -> List:
   script = '''
@@ -45,8 +48,9 @@ def close_application(app_name) -> None:
 
 def main():
   open_apps = get_open_apps()
-  banned_apps = ['Arc', 'Safari', 'Firefox', 'Music', 'Steam', 'DeSmuME']
-  if is_past_22():
+  # banned_apps = ['Safari', 'Firefox', 'Music', 'Steam', 'DeSmuME']
+  banned_apps = ['Obsidian']
+  if is_past_time(12):
     for banned_app in banned_apps:
       if banned_app in open_apps:
         close_application(banned_app)
